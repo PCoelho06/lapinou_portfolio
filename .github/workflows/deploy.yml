@@ -24,24 +24,15 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p 65002 154.56.33.55 >> ~/.ssh/known_hosts
-          echo "Host hostinger" >> ~/.ssh/config
-          echo "  HostName 154.56.33.55" >> ~/.ssh/config
-          echo "  User uu309746653" >> ~/.ssh/config
-          echo "  Port 65002" >> ~/.ssh/config
-          echo "  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
-          chmod 600 ~/.ssh/config
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
 
-      - name: Deploy to Hostinger
+      - name: Deploy via Rsync with Password Authentication
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          rsync -avz --delete \
+          sshpass -p "$SSH_PASSWORD" rsync -avz --delete \
+            --rsh="ssh -p 65002 u309746653@154.56.33.55" \
             --exclude 'api/' \
             dist/ \
             hostinger:/domains/lapinou.tech/public_html/
