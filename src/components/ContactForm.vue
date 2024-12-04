@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import LapinouButton from './LapinouButton.vue';
+import apiClient from '@/services/apiClient';
 
 const firstName = ref('');
 const lastName = ref('');
@@ -47,11 +48,6 @@ const notificationType = ref('');
 const showNotification = ref(false);
 
 const handleSubmit = () => {
-  if (antispam.value) {
-    console.log('Spam detected');
-    return;
-  }
-
   const formData = {
     firstName: firstName.value,
     lastName: lastName.value,
@@ -61,27 +57,20 @@ const handleSubmit = () => {
   };
 
   // Add your form submission logic here
-  fetch('https://api.lapinou.tech/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-API-Key': '200056c3638235e0d41bc26f58d1460273d7b5196f9d9427df7da7d6631b6846'
-    },
-    body: JSON.stringify(formData),
-  })
-    .then(response => response.json())
-    .then(data => {
-      firstName.value = '';
-      lastName.value = '';
-      email.value = '';
-      message.value = '';
-      antispam.value = '';
-      notificationType.value = data.status;
-      handleNotification();
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+  try {
+    sendEmail(formData);
+    firstName.value = '';
+    lastName.value = '';
+    email.value = '';
+    message.value = '';
+    antispam.value = '';
+    notificationType.value = 'success';
+    handleNotification();
+  } catch (error) {
+    console.error(error);
+    notificationType.value = 'error';
+    handleNotification();
+  }
 };
 
 const handleNotification = () => {
@@ -90,6 +79,11 @@ const handleNotification = () => {
     notificationType.value = '';
     showNotification.value = false;
   }, 5000);
+};
+
+const sendEmail = async (data) => {
+  const response = await apiClient.post('/messages', data);
+  console.log(response);
 };
 
 </script>

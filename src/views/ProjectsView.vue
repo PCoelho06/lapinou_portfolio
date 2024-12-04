@@ -93,45 +93,45 @@ import PageTitle from '@/components/PageTitle.vue';
 
 const galleryPartageProf: GalleryImages[] = [
   {
-    src: '/src/assets/images/projets/PartageProf1.png',
+    src: '/images/projets/PartageProf1.png',
     alt: 'PartageProf.fr - Page d\'accueil',
   },
   {
-    src: '/src/assets/images/projets/PartageProf2.png',
+    src: '/images/projets/PartageProf2.png',
     alt: 'PartageProf.fr - Page de recherche de documents',
   },
   {
-    src: '/src/assets/images/projets/PartageProf3.png',
+    src: '/images/projets/PartageProf3.png',
     alt: 'PartageProf.fr - Page de profil utilisateur',
   },
 ];
 
 const galleryMarquei: GalleryImages[] = [
   {
-    src: '/src/assets/images/projets/Marquei1.png',
+    src: '/images/projets/Marquei1.png',
     alt: 'Marquei - Page d\'accueil',
   },
   {
-    src: '/src/assets/images/projets/Marquei2.png',
+    src: '/images/projets/Marquei2.png',
     alt: 'Marquei - Page de réservations',
   },
   {
-    src: '/src/assets/images/projets/Marquei3.png',
+    src: '/images/projets/Marquei3.png',
     alt: 'Marquei - Page de salon',
   },
 ];
 
 const galleryRotary: GalleryImages[] = [
   {
-    src: '/src/assets/images/projets/Rotary1.png',
+    src: '/images/projets/Rotary1.png',
     alt: 'Rotary Porto Vecchio - Page d\'accueil',
   },
   {
-    src: '/src/assets/images/projets/Rotary2.png',
+    src: '/images/projets/Rotary2.png',
     alt: 'Rotary Porto Vecchio - Page de présentation',
   },
   {
-    src: '/src/assets/images/projets/Rotary3.png',
+    src: '/images/projets/Rotary3.png',
     alt: 'Rotary Porto Vecchio - Page de contact',
   },
 ];

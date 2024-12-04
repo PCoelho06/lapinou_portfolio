@@ -13,39 +13,63 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      meta: {
+        title: 'Portfolio de Pierre Coelho',
+      },
       component: HomeView,
     },
     {
       path: '/a-propos',
       name: 'about',
+      meta: { title: 'À propos de moi' },
       component: AboutView,
     },
     {
       path: '/projets',
       name: 'projects',
+      meta: { title: 'Projets' },
       component: ProjectsView,
     },
     {
       path: '/contact',
       name: 'contact',
+      meta: { title: 'Contact' },
       component: ContactView,
     },
     {
       path: '/politique-accessibilite',
       name: 'accessibility',
+      meta: { title: "Politique d'accessibilité" },
       component: AccessibilityView,
     },
     {
       path: '/politique-confidentialite',
       name: 'privacy',
+      meta: { title: 'Politique de confidentialité' },
       component: PrivacyView,
     },
     {
       path: '/mentions-legales',
       name: 'terms',
+      meta: { title: 'Mentions légales' },
       component: TermsView,
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0)
+  document.title = `Lapinou.tech - ${to.meta.title}`
+  document
+    .querySelector('meta[name="title"]')
+    .setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
+  document
+    .querySelector('meta[property="og:title"]')
+    .setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
+  document
+    .querySelector('meta[name="twitter:title"]')
+    .setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
+  next()
 })
 
 export default router
