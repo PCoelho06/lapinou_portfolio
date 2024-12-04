@@ -27,6 +27,11 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install sshpass
 
+      - name: Add Host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 65002 154.56.33.55 >> ~/.ssh/known_hosts
+
       - name: Deploy via Rsync with Password Authentication
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
