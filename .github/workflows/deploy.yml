@@ -24,15 +24,23 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to Hostinger
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Configure SSH
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          echo "Host hostinger" >> ~/.ssh/config
+          echo "  HostName 154.56.33.55" >> ~/.ssh/config
+          echo "  User uu309746653" >> ~/.ssh/config
+          echo "  Port 65002" >> ~/.ssh/config
+          echo "  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Deploy to Hostinger
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
           rsync -avz --delete \
             --exclude 'api/' \
-            -e "ssh -p 65002" \
             dist/ \
-            uu309746653@154.56.33.55:/domains/lapinou.tech/public_html/
+            hostinger:/domains/lapinou.tech/public_html/
