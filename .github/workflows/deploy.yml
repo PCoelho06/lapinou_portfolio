@@ -32,5 +32,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           rsync -avz --delete \
-          dist/ \
-          uu309746653@154.56.33.55:/domains/lapinou.tech/public_html/
+            --exclude 'api/' \
+            -e "ssh -p 65002" \
+            dist/ \
+            uu309746653@154.56.33.55:/domains/lapinou.tech/public_html/
