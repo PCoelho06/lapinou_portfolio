@@ -86,7 +86,7 @@
 <script setup lang="ts">
 import ImageGallery from '@/components/ImageGallery.vue';
 import ArrowTopRightOnSquareIcon from '@/components/icons/ArrowTopRightOnSquareIcon.vue';
-import type { GalleryImages } from '@/types/project';
+import type { GalleryImages } from '@/types';
 import { RouterLink } from 'vue-router';
 import LapinouButton from '@/components/LapinouButton.vue';
 import PageTitle from '@/components/PageTitle.vue';

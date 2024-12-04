@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import type { GalleryImages } from '@/types/project';
+import type { GalleryImages } from '@/types';
 
 const props = defineProps<{
   images: GalleryImages[];
