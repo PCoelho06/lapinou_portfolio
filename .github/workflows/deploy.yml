@@ -40,4 +40,4 @@ jobs:
             --rsh="ssh -p 65002 u309746653@154.56.33.55" \
             --exclude 'api/' \
             dist/ \
-            hostinger:/domains/lapinou.tech/public_html/
+            /domains/lapinou.tech/public_html/
