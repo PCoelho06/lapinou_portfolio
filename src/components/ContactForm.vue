@@ -39,6 +39,8 @@ import { ref } from 'vue';
 import LapinouButton from './LapinouButton.vue';
 import apiClient from '@/services/apiClient';
 
+import type { Message } from '@/types';
+
 const firstName = ref('');
 const lastName = ref('');
 const email = ref('');
@@ -48,9 +50,9 @@ const notificationType = ref('');
 const showNotification = ref(false);
 
 const handleSubmit = () => {
-  const formData = {
-    firstName: firstName.value,
-    lastName: lastName.value,
+  const formData: Message = {
+    first_name: firstName.value,
+    last_name: lastName.value,
     email: email.value,
     message: message.value,
     antispam: antispam.value,
@@ -81,7 +83,7 @@ const handleNotification = () => {
   }, 5000);
 };
 
-const sendEmail = async (data) => {
+const sendEmail = async (data: Message) => {
   const response = await apiClient.post('/messages', data);
   console.log(response);
 };

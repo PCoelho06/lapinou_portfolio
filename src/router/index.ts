@@ -60,15 +60,18 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   window.scrollTo(0, 0)
   document.title = `Lapinou.tech - ${to.meta.title}`
-  document
-    .querySelector('meta[name="title"]')
-    .setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
-  document
-    .querySelector('meta[property="og:title"]')
-    .setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
-  document
-    .querySelector('meta[name="twitter:title"]')
-    .setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
+  const titleMetaTag = document.querySelector('meta[name="title"]')
+  if (titleMetaTag) {
+    titleMetaTag.setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
+  }
+  const ogTitleMetaTag = document.querySelector('meta[property="og:title"]')
+  if (ogTitleMetaTag) {
+    ogTitleMetaTag.setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
+  }
+  const twitterTitleMetaTag = document.querySelector('meta[name="twitter:title"]')
+  if (twitterTitleMetaTag) {
+    twitterTitleMetaTag.setAttribute('content', `Lapinou.tech - ${to.meta.title}`)
+  }
   next()
 })
 
